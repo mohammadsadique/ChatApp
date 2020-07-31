@@ -17,3 +17,6 @@ body{
      float: left;
      margin: 5px 0 0 8px;
 }
+.direct-chat-messages{
+    height: 460px;
+}
