@@ -1,0 +1,19 @@
+body{
+    background: aliceblue;
+
+}
+.chat-div{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+.direct-chat-warning .right>.direct-chat-text{
+    float: right;
+}
+.right .direct-chat-text {
+    margin-right: 8px;
+}
+.direct-chat-text {
+     float: left;
+     margin: 5px 0 0 8px;
+}
