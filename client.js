@@ -26,46 +26,48 @@ socket.on('discon' , data => {
 
 
 $(document).ready(function() {
+
+
    $(document).on('click','#submit',function(e){
-       e.preventDefault();
+        $('form').submit();
+   });
+   $(document).on('submit','form',function(e){
+        e.preventDefault();
+        alert('hi');
         var message = $('#message').val();
-        socket.emit('msg',message);
+        var name = $('.ownname').text();
         
-        socket.on('sendmsg', data => {
-
-        
-            $('.direct-chat-messages').append(`
-                <div class="direct-chat-msg">
-                    <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-left">`+ data.name +`</span>
-                    </div>
-                    <img class="direct-chat-img" src="img/user1-128x128.jpg" alt="message user image" />
-                    <div class="direct-chat-text">
-                    `+ data.msg +`
-                    </div>
-                </div>
-            `);
-        });
-
-        socket.on('myselfsendmsg' , data => {
-            $('.direct-chat-messages').append(`
+        $('.direct-chat-messages').append(`
             <div class="direct-chat-msg right">
                 <div class="direct-chat-info clearfix">
-                <span class="direct-chat-name pull-right">`+data.name+`</span>
+                <span class="direct-chat-name pull-right">`+name+`</span>
                 </div>
                 <img class="direct-chat-img" src="img/user3-128x128.jpg" alt="message user image" />
 
                 <div class="direct-chat-text">
-               `+data.msg+`
+               `+message+`
                 </div>
             </div>`);
-        });
 
+        socket.emit('msg',message);
+        
         $('#message').val('');
    }) ;
 });
 
-
+socket.on('sendmsg', data => {
+    $('.direct-chat-messages').append(`
+        <div class="direct-chat-msg">
+            <div class="direct-chat-info clearfix">
+            <span class="direct-chat-name pull-left">`+ data.name +`</span>
+            </div>
+            <img class="direct-chat-img" src="img/user1-128x128.jpg" alt="message user image" />
+            <div class="direct-chat-text">
+            `+ data.msg +`
+            </div>
+        </div>
+    `);
+});
 
 
 
